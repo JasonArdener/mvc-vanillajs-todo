@@ -9952,7 +9952,34 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// var Carousel = require('./components');
-	var $ = __webpack_require__(1);
+	var store = __webpack_require__(3); 
+	var model = __webpack_require__(4);  
+	var template = __webpack_require__(5); 
+	var view = __webpack_require__(6);
+	var controller = __webpack_require__(7);
+
+	// APP
+	(function() {
+	    'use strict';
+	  
+	  function Todo(name) {
+	    this.storage = new app.Store(name);
+	    this.model = new app.Model(this.storage); 
+	    this.template = new app.Template();
+	    this.view = new app.View(this.template);
+	    this.controller = new app.Controller(this.model, this.view);
+	  }
+	  
+	  var todo = new Todo('todo-app');
+	  
+	  todo.controller.showEntries();
+
+	  window.todo = todo;
+	})();
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
 
 	// STORE
 	(function (window) {
@@ -9960,7 +9987,7 @@
 	  
 	  function Store(name) {
 	    // Create some placeholder data if there is not existing data.
-	    if (!localStorage[name]) {
+	    if (!localStorage[name]) { 
 	        var data = {
 	          todos: [
 	              {
@@ -10011,7 +10038,9 @@
 	  window.app.Store = Store;
 	})(window);
 
-
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
 
 	// MODEL
 	(function (window) {
@@ -10037,7 +10066,9 @@
 	  window.app.Model = Model;
 	})(window);
 
-
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
 
 	// TEMPLATE
 	(function (window) {
@@ -10079,7 +10110,9 @@
 	  window.app.Template = Template;
 	})(window);
 
-
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
 
 	// VIEW
 	(function (window) {
@@ -10100,8 +10133,11 @@
 	  window.app.View = View;
 	})(window);
 
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
 
-
+	var $ = __webpack_require__(1);
 
 	// CONTROLLER
 	(function (window) {
@@ -10143,27 +10179,6 @@
 	  window.app = window.app || {};
 	  window.app.Controller = Controller;
 	})(window);
-
-
-
-	// APP
-	(function() {
-	    'use strict';
-	  
-	  function Todo(name) {
-	    this.storage = new app.Store(name);
-	    this.model = new app.Model(this.storage);
-	    this.template = new app.Template();
-	    this.view = new app.View(this.template);
-	    this.controller = new app.Controller(this.model, this.view);
-	  }
-	  
-	  var todo = new Todo('todo-app');
-	  
-	  todo.controller.showEntries();
-
-	  window.todo = todo;
-	})();
 
 /***/ }
 /******/ ]);

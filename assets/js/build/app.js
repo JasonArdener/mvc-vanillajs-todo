@@ -47,7 +47,36 @@
 	'use strict';
 
 	// var Carousel = require('./components');
-	var $ = __webpack_require__(1);
+	var store = __webpack_require__(1);
+	var model = __webpack_require__(2);
+	var template = __webpack_require__(3);
+	var view = __webpack_require__(4);
+	var controller = __webpack_require__(5);
+
+	// APP
+	(function () {
+	  'use strict';
+
+	  function Todo(name) {
+	    this.storage = new app.Store(name);
+	    this.model = new app.Model(this.storage);
+	    this.template = new app.Template();
+	    this.view = new app.View(this.template);
+	    this.controller = new app.Controller(this.model, this.view);
+	  }
+
+	  var todo = new Todo('todo-app');
+
+	  todo.controller.showEntries();
+
+	  window.todo = todo;
+	})();
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	'use strict';
 
 	// STORE
 	(function (window) {
@@ -102,6 +131,12 @@
 	  window.app.Store = Store;
 	})(window);
 
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	'use strict';
+
 	// MODEL
 	(function (window) {
 	  'use strict';
@@ -126,40 +161,52 @@
 	  window.app.Model = Model;
 	})(window);
 
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
 	// TEMPLATE
 	(function (window) {
-	  'use strict';
+	    'use strict';
 
-	  function Template() {
-	    this.itemTemplate = '<li data-id="{{id}}">' + '<input type="checkbox" {{checked}} />' + '<label>{{body}}</label>' + '<button class="j-delete">X</button>' + '</li>';
-	  }
-
-	  Template.prototype.show = function (data) {
-	    var output = '',
-	        i = 0;
-
-	    data = JSON.parse(data).todos;
-
-	    for (i = 0; i < data.length; i++) {
-	      var template = this.itemTemplate,
-	          checked = '';
-
-	      if (data[i].checked === "true") {
-	        checked = "checked";
-	      }
-
-	      template = template.replace('{{id}}', i);
-	      template = template.replace('{{body}}', data[i].body);
-	      template = template.replace('{{checked}}', checked);
-	      output = output + template;
+	    function Template() {
+	        this.itemTemplate = '<li data-id="{{id}}">' + '<input type="checkbox" {{checked}} />' + '<label>{{body}}</label>' + '<button class="j-delete">X</button>' + '</li>';
 	    }
 
-	    return output;
-	  };
+	    Template.prototype.show = function (data) {
+	        var output = '',
+	            i = 0;
 
-	  window.app = window.app || {};
-	  window.app.Template = Template;
+	        data = JSON.parse(data).todos;
+
+	        for (i = 0; i < data.length; i++) {
+	            var template = this.itemTemplate,
+	                checked = '';
+
+	            if (data[i].checked === "true") {
+	                checked = "checked";
+	            }
+
+	            template = template.replace('{{id}}', i);
+	            template = template.replace('{{body}}', data[i].body);
+	            template = template.replace('{{checked}}', checked);
+	            output = output + template;
+	        }
+
+	        return output;
+	    };
+
+	    window.app = window.app || {};
+	    window.app.Template = Template;
 	})(window);
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	'use strict';
 
 	// VIEW
 	(function (window) {
@@ -179,6 +226,14 @@
 	  window.app = window.app || {};
 	  window.app.View = View;
 	})(window);
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var $ = __webpack_require__(6);
 
 	// CONTROLLER
 	(function (window) {
@@ -221,27 +276,8 @@
 	  window.app.Controller = Controller;
 	})(window);
 
-	// APP
-	(function () {
-	  'use strict';
-
-	  function Todo(name) {
-	    this.storage = new app.Store(name);
-	    this.model = new app.Model(this.storage);
-	    this.template = new app.Template();
-	    this.view = new app.View(this.template);
-	    this.controller = new app.Controller(this.model, this.view);
-	  }
-
-	  var todo = new Todo('todo-app');
-
-	  todo.controller.showEntries();
-
-	  window.todo = todo;
-	})();
-
 /***/ },
-/* 1 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
