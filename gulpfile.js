@@ -62,26 +62,26 @@ gulp.task('webpack:tests', function() {
 
 
 gulp.task('compass', function() {
-  // gulp.src('./assets/css/dev/*.scss')
-  //   .pipe(compass({
-  //     css: './assets/css/build',
-  //     sass: './assets/css/dev',
-  //   }))
-  //   .pipe(autoprefixer({
-  //       browsers: ['last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
-  //   }))
-  //   .pipe(pixrem({
-  //     rootValue: '100%',
-  //     replace: true
-  //   }))
-  //   .pipe(gulp.dest('./assets/css/build/'));
+  gulp.src('./assets/css/*.scss')
+    .pipe(compass({
+      css: './assets/css/build',
+      sass: './assets/css',
+    }))
+    .pipe(autoprefixer({
+        browsers: ['last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']
+    }))
+    .pipe(pixrem({
+      rootValue: '100%',
+      replace: true
+    }))
+    .pipe(gulp.dest('./assets/css/build/'));
 });
 
 
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    // gulp.watch('assets/css/dev/**/*.scss', ['compass']);
+    gulp.watch('assets/css/**/*.scss', ['compass']);
     gulp.watch(['assets/js/components/**/*', 'assets/js/app.js'], ['webpack', 'webpack:tests', 'tests']);
     gulp.watch(['assets/js/app.spec.js'], ['webpack:tests']);
     gulp.watch(['assets/js/build/app.spec.js'], ['tests']);

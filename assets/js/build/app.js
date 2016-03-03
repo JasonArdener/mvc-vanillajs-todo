@@ -46,7 +46,6 @@
 
 	'use strict';
 
-	// var Carousel = require('./components');
 	var store = __webpack_require__(1);
 	var model = __webpack_require__(2);
 	var template = __webpack_require__(3);

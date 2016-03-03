@@ -1,0 +1,59 @@
+html {
+	font-family: sans-serif;
+}
+
+h1 {
+	margin-bottom: 0.2em;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.c-date {
+	display: block;
+	text-align: center;
+	text-transform: uppercase;
+	color: #cdcdcd;
+}
+
+.c-todo-wrap {
+	width: 100%;
+	max-width: 400px;
+	margin-top: 1rem;
+	margin-left: auto;
+	margin-right: auto;
+} 
+
+.c-list {
+	list-style: none;
+	margin: 0;
+	margin-top: 1rem;
+	padding: 0;
+
+	li {
+		display: block;
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid #cdcdcd;
+
+		&:nth-child(2n) {
+			background-color: aliceblue;
+		}
+
+		input:checked + label {
+			text-decoration: line-through;
+		}
+
+		button {
+			display: inline-block;
+			float: right;
+			background: none;
+			border: 0;
+			cursor: pointer;
+			padding: 0;
+			width: 1em;
+			height: 1em;
+			line-height: 1.5em;
+			text-align: center;
+		}
+	}
+}

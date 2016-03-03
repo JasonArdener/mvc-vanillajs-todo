@@ -9894,7 +9894,6 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// var Carousel = require('./components');
 	var store = __webpack_require__(3); 
 	var model = __webpack_require__(4);  
 	var template = __webpack_require__(5); 

@@ -1,4 +1,3 @@
-// var Carousel = require('./components');
 var store = require('./components/store.js'); 
 var model = require('./components/model.js');  
 var template = require('./components/template.js'); 
