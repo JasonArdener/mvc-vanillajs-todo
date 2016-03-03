@@ -48,67 +48,10 @@
 	$('body').append('<ul class="c-list" id="test"></ul>');
 
 	var app = __webpack_require__(2);
+	var app = __webpack_require__(8);
+	var app = __webpack_require__(9);
+	var app = __webpack_require__(10);
 
-
-	describe('Store', function() {
-	  it('returns storage object', function() {
-	    expect(todo.storage.returnStorage()).toBeDefined();
-	  });
-
-	  it('has 3 todo items', function() {
-	    expect(JSON.parse(todo.storage.returnStorage()).todos.length).toBe(3);
-	  });
-
-	  it('can delete a todo', function() {
-	    todo.storage.delete(1);
-	    expect(JSON.parse(todo.storage.returnStorage()).todos.length).toBe(2);
-	  });
-	});
-
-
-	describe("Local storage", function() {
-	  var todos = null;
-	  beforeEach(function() {
-	    todos = JSON.parse(localStorage['todo-app']).todos;
-	  });
-	  
-	  it("have 2 todo items", function() {
-	    expect(todos.length).toBe(2);
-	  });
-
-	  it("second todo content is Have tea", function() {
-	    expect(todos[1].body).toBe("Sleep");
-	  });
-	});
-
-
-	describe('Template', function() {
-	  var data = {
-	    todos: [
-	      {
-	        'body': 'Make this app',
-	        'checked': 'false'
-	      }
-	    ]
-	  };
-
-	  it('can sucessfully generate html from template and data', function() {
-	    var templateOut = todo.template.show(JSON.stringify(data));
-	    expect(templateOut).not.toBe(null);
-	    expect(templateOut).toBe('<li data-id="0"><input type="checkbox"  /><label>Make this app</label><button class="j-delete">X</button></li>');
-	  });
-	});
-
-
-	describe('View', function() {
-	  it('shows the correct number of todo items', function() {
-	    expect($('.c-list li').length).toBe(3);
-	  });
-
-	  it('shows the correct label content', function() {
-	    expect($('.c-list li').first().find('label').text()).toBe('Make this app');
-	  });
-	});
 
 /***/ },
 /* 1 */
@@ -9995,7 +9938,7 @@
 	              'checked': 'false'
 	            },
 	            {
-	              'body': 'Have tea', 
+	              'body': 'Have tea',
 	              'checked': 'true'
 	            },
 	            {
@@ -10172,30 +10115,102 @@
 	    var currentEl = null;
 	    var i, j;
 
-	    var deleteHandler = function(e) { 
+	    this.deleteHandler = function(e) { 
 	      var thisId = e.srcElement.parentNode.dataset.id;
 	      self.removeEntry(thisId);
 	    };
 
-	    var checkHandler = function(e) { 
+	    this.checkHandler = function(e) { 
 	      var thisId = e.srcElement.parentNode.dataset.id;
 	      self.updateDone(thisId);
 	    };
 
 	    for (i = 0; i < deleteButtons.length; i++) {
-	      currentEl = deleteButtons[i];
-	      currentEl.addEventListener('click', deleteHandler, false);
+	      currentEl = deleteButtons[i]; 
+	      currentEl.addEventListener('click', this.deleteHandler, false);
 	    } 
 	 
 	    for (j = 0; j < checkboxes.length; j++) {
-	      currentEl = checkboxes[j];
-	      currentEl.addEventListener('click', checkHandler, false);
+	      currentEl = checkboxes[j]; 
+	      currentEl.addEventListener('click', this.checkHandler, false);
 	    }
 	  };
 	  
 	  window.app = window.app || {};
 	  window.app.Controller = Controller;
 	})(window);
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	describe('Store', function() {
+	  it('returns storage object', function() {
+	    expect(todo.storage.returnStorage()).toBeDefined();
+	  });
+
+	  it('has 3 todo items', function() {
+	    expect(JSON.parse(todo.storage.returnStorage()).todos.length).toBe(3);
+	  });
+
+	  it('can delete a todo', function() {
+	    todo.storage.delete(1);
+	    expect(JSON.parse(todo.storage.returnStorage()).todos.length).toBe(2);
+	  });
+	});
+
+	describe("Local storage", function() {
+	  var todos = null;
+	  beforeEach(function() {
+	    todos = JSON.parse(localStorage['todo-app']).todos;
+	  });
+	  
+	  it("have 2 todo items", function() {
+	    expect(todos.length).toBe(2);
+	  });
+
+	  it("second todo content is Have tea", function() {
+	    expect(todos[1].body).toBe("Sleep");
+	  });
+	});
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	describe('Template', function() {
+	  var data = {
+	    todos: [
+	      {
+	        'body': 'Make this app',
+	        'checked': 'false'
+	      }
+	    ]
+	  };
+
+	  it('can sucessfully generate html from template and data', function() {
+	    var templateOut = todo.template.show(JSON.stringify(data));
+	    expect(templateOut).not.toBe(null);
+	    expect(templateOut).toBe('<li data-id="0"><input type="checkbox"  /><label>Make this app</label><button class="j-delete">X</button></li>');
+	  });
+	});
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(1);
+
+	describe('View', function() {
+	  it('shows the correct number of todo items', function() {
+	    expect($('.c-list li').length).toBe(3);
+	  });
+
+	  it('shows the correct label content', function() {
+	    expect($('.c-list li').first().find('label').text()).toBe('Make this app');
+	  });
+	});
 
 /***/ }
 /******/ ]);

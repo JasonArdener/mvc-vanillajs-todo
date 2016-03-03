@@ -12,7 +12,7 @@
               'checked': 'false'
             },
             {
-              'body': 'Have tea', 
+              'body': 'Have tea',
               'checked': 'true'
             },
             {

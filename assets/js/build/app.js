@@ -268,24 +268,24 @@
 	    var currentEl = null;
 	    var i, j;
 
-	    var deleteHandler = function deleteHandler(e) {
+	    this.deleteHandler = function (e) {
 	      var thisId = e.srcElement.parentNode.dataset.id;
 	      self.removeEntry(thisId);
 	    };
 
-	    var checkHandler = function checkHandler(e) {
+	    this.checkHandler = function (e) {
 	      var thisId = e.srcElement.parentNode.dataset.id;
 	      self.updateDone(thisId);
 	    };
 
 	    for (i = 0; i < deleteButtons.length; i++) {
 	      currentEl = deleteButtons[i];
-	      currentEl.addEventListener('click', deleteHandler, false);
+	      currentEl.addEventListener('click', this.deleteHandler, false);
 	    }
 
 	    for (j = 0; j < checkboxes.length; j++) {
 	      currentEl = checkboxes[j];
-	      currentEl.addEventListener('click', checkHandler, false);
+	      currentEl.addEventListener('click', this.checkHandler, false);
 	    }
 	  };
 
