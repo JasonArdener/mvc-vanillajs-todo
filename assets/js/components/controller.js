@@ -1,5 +1,3 @@
-var $ = require('jquery');
-
 // CONTROLLER
 (function (window) {
     'use strict';
@@ -8,21 +6,12 @@ var $ = require('jquery');
     var self = this;
     self.model = model;
     self.view = view;
-
-    $('body').on('click', '.j-delete', function() {
-      const thisId = $(this).parent().data('id');
-      self.removeEntry(thisId);
-    });
-
-    $('body').on('click', 'input[type="checkbox"]', function() {
-      const thisId = $(this).parent().data('id');
-      self.updateDone(thisId);
-    });
   }
   
   Controller.prototype.showEntries = function() {
     var self = this;
     self.view.render(self.model.read());
+    self.setupButtons();
   };
   
   Controller.prototype.removeEntry = function(id) {
@@ -35,6 +24,34 @@ var $ = require('jquery');
     var self = this;
     self.model.updateDone(id);
     self.showEntries();
+  };
+
+  Controller.prototype.setupButtons = function() {
+    var self = this;
+    var deleteButtons = document.getElementsByClassName("j-delete");
+    var checkboxes = document.getElementsByTagName("input");
+    var currentEl = null;
+    var i, j;
+
+    var deleteHandler = function(e) { 
+      var thisId = e.srcElement.parentNode.dataset.id;
+      self.removeEntry(thisId);
+    };
+
+    var checkHandler = function(e) { 
+      var thisId = e.srcElement.parentNode.dataset.id;
+      self.updateDone(thisId);
+    };
+
+    for (i = 0; i < deleteButtons.length; i++) {
+      currentEl = deleteButtons[i];
+      currentEl.addEventListener('click', deleteHandler, false);
+    } 
+ 
+    for (j = 0; j < checkboxes.length; j++) {
+      currentEl = checkboxes[j];
+      currentEl.addEventListener('click', checkHandler, false);
+    }
   };
   
   window.app = window.app || {};
